@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SentimentControllerService } from 'src/app/controllers/sentiment-controller.service';
+import {FinnhubService} from '../../services/finnhub.service';
+import {SentimentData} from '../../models/sentiment-data';
 
 @Component({
   selector: 'app-sentiment',
@@ -8,14 +9,17 @@ import { SentimentControllerService } from 'src/app/controllers/sentiment-contro
   styleUrls: ['./sentiment.component.scss']
 })
 export class SentimentComponent implements OnInit {
+  sentimentData!: SentimentData;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    public sentimentController: SentimentControllerService) { }
+    private finnhub: FinnhubService,
+  ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(console.warn);
-    // console.warn(this.activatedRoute);
+    this.activatedRoute.params.subscribe(params => {
+      this.finnhub.getInsiderSentiment(params['symbol']).subscribe(sentimentData => this.sentimentData = sentimentData);
+    });
   }
 
 }

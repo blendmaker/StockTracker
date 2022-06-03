@@ -1,0 +1,12 @@
+:host {
+  button.close-button {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+  }
+  mat-icon.color-green {
+    color: darkgreen;
+  }
+}

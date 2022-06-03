@@ -2,5 +2,46 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #ddd;
+}
+
+.flex-cols {
+  display: flex;
+  &>div {
+    flex: 1;
+  }
+}
+
+.mr {
+  margin-right: 20px;
+}
+.ml {
+  margin-left: 20px;
+}
+.mt {
+  margin-top: 20px;
+}
+.mb {
+  margin-bottom: 20px;
+}
+
+mat-card {
+  margin-bottom: 25px;
+
+  .mat-card-title {
+    margin-bottom: 20px;
+  }
+
+  mat-card-footer {
+    button.mat-raised-button, button.mat-button {
+      margin: 5px;
+    }
+  }
+}

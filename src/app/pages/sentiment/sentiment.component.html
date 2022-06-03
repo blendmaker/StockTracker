@@ -1,12 +1,30 @@
-<mat-card class="example-card">
-  <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  <mat-card-title>Shiba Inu</mat-card-title>
+<mat-card *ngIf="sentimentData;">
+
+  <mat-card-title>
+    {{ sentimentData.name }} ({{ sentimentData.symbol }})
+  </mat-card-title>
+
   <mat-card-content>
-    <p>This card has divider and indeterminate progress as footer</p>
+    <div class="flex-cols">
+      <ng-container *ngFor="let month of sentimentData.data.reverse(); let i = index">
+        <div class="mr" *ngIf="i < 3">
+          <p>{{ month.year + '-' + month.month + '-01' | date: 'MMMM' }}</p>
+          <p>Change: {{ month.change }}</p>
+          <p>MSPR: {{ month.mspr | number }}</p>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="sentimentData.data.length === 0">
+        <p>To this symbol have no recent insider sentiments been found.</p>
+      </ng-container>
+
+    </div>
   </mat-card-content>
+
   <mat-divider inset></mat-divider>
+
   <mat-card-footer>
     <button mat-raised-button color="primary" [routerLink]="'/'">Back to list of stocks</button>
   </mat-card-footer>
-</mat-card>
 
+</mat-card>

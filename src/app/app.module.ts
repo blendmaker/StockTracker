@@ -10,23 +10,41 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCommonModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import {HttpClientModule} from '@angular/common/http';
+import {CommonModule, PercentPipe} from '@angular/common';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {FormsModule} from '@angular/forms';
+import { StockCardComponent } from './components/stock-card/stock-card.component';
+import { SignedPercentPipe } from './pipes/signed-percent.pipe';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SentimentComponent
+    SentimentComponent,
+    StockCardComponent,
+    SignedPercentPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    CommonModule,
+    FormsModule,
     MatCommonModule,
     MatButtonModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatAutocompleteModule
   ],
-  providers: [],
+  providers: [ PercentPipe ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

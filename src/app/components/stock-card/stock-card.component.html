@@ -1,0 +1,38 @@
+<mat-card *ngIf="stockData">
+
+  <mat-card-title>
+    {{ stockData.name }} ({{ symbol }})
+    <button mat-icon-button class="close-button" role="button" (click)="removeClicked.emit()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-title>
+
+  <mat-card-content>
+    <div class="flex-cols">
+      <div class="mr">
+        <p>Change Today: {{ stockData.d | signedPercent }}</p>
+        <p>Current Price: {{ stockData.c | currency }}</p>
+      </div>
+      <div>
+        <p>Opening Price: {{ stockData.o | currency }}</p>
+        <p>High Price: {{ stockData.h | currency }}</p>
+      </div>
+      <div></div>
+      <div>
+        <mat-icon class="color-green" *ngIf="stockData.d >= 0; else arrowDown">arrow_upward</mat-icon>
+        <ng-template #arrowDown>
+          <mat-icon color="warn">arrow_downward</mat-icon>
+        </ng-template>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-divider inset></mat-divider>
+
+  <mat-card-footer>
+    <button mat-button color="primary" [routerLink]="'/sentiment/' + symbol">
+      Go to social sentiment details &gt;
+    </button>
+  </mat-card-footer>
+
+</mat-card>

@@ -1,1 +1,26 @@
-<p>home works!</p>
+<mat-card>
+  <mat-card-content>
+    <p>Enter the symbol of a stock to track (ie. TSLA, GOOGL)</p>
+  <mat-form-field appearance="fill" class="mr">
+    <mat-label>Input</mat-label>
+    <input
+      matInput
+      [(ngModel)]="inputValue">
+  </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!isSymbolValid(inputValue)"
+      (click)="localStorage.storeSymbol(inputValue)">
+      Track Stock
+    </button>
+  </mat-card-content>
+</mat-card>
+
+<ng-container *ngFor="let symbol of localStorage.storedSymbols$ | async ">
+  <app-stock-card
+    [symbol]="symbol"
+    (removeClicked)="localStorage.removeSymbol(symbol)"
+  ></app-stock-card>
+</ng-container>
