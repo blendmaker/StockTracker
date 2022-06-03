@@ -7,10 +7,18 @@
   <mat-card-content>
     <div class="flex-cols">
       <ng-container *ngFor="let month of sentimentData.data.reverse(); let i = index">
-        <div class="mr" *ngIf="i < 3">
-          <p>{{ month.year + '-' + month.month + '-01' | date: 'MMMM' }}</p>
-          <p>Change: {{ month.change }}</p>
-          <p>MSPR: {{ month.mspr | number }}</p>
+        <div class="mr flex-cols" *ngIf="i < 3">
+          <div>
+            <p>{{ month.year + '-' + month.month + '-01' | date: 'MMMM' }}</p>
+            <p>Change: {{ month.change }}</p>
+            <p>MSPR: {{ month.mspr | number }}</p>
+          </div>
+          <div>
+            <mat-icon class="color-green mt" *ngIf="month.change >= 0; else arrowDown">arrow_upward</mat-icon>
+            <ng-template #arrowDown>
+              <mat-icon color="warn" class="mt">arrow_downward</mat-icon>
+            </ng-template>
+          </div>
         </div>
       </ng-container>
 
