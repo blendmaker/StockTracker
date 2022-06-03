@@ -68,9 +68,3 @@ export class FinnhubService {
     };
   }
 }
-/**
- * https://finnhub.io/docs/api/quote
- * https://finnhub.io/docs/api/symbol-search
- * https://finnhub.io/api/v1/stock/profile2?symbol=AAPL&token=
- * bu4f8kn48v6uehqi3cqg
- */

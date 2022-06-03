@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StockCardComponent } from './stock-card.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('StockCardComponent', () => {
   let component: StockCardComponent;
@@ -8,7 +9,10 @@ describe('StockCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StockCardComponent ]
+      declarations: [ StockCardComponent ],
+      imports: [
+        HttpClientTestingModule
+      ]
     })
     .compileComponents();
   });
@@ -16,6 +20,7 @@ describe('StockCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(StockCardComponent);
     component = fixture.componentInstance;
+    component.symbol = 'TSLA';
     fixture.detectChanges();
   });
 
