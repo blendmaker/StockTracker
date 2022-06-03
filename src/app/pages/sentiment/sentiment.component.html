@@ -1,7 +1,7 @@
 <mat-card *ngIf="sentimentData;">
 
   <mat-card-title>
-    {{ sentimentData.name }} ({{ sentimentData.symbol }})
+    {{ (finnhub.quoteBySymbol(sentimentData.symbol) | async)?.name }} ({{ sentimentData.symbol }})
   </mat-card-title>
 
   <mat-card-content>

@@ -32,11 +32,6 @@ export interface SentimentData {
   symbol: string;
 
   /**
-   * The Companyname
-   */
-  name: string;
-
-  /**
    * Array of sentiment items.
    */
   data: SentimentItem[];
