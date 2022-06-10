@@ -57,7 +57,6 @@ export class FinnhubService {
 
     return (this.http.get(this.sentimentUrl, params) as Observable<SentimentData>).pipe(
       tap(sentimentData => this.cachedSentiments[symbol] = sentimentData));
-
   }
 
   /**

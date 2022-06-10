@@ -1,7 +1,8 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FinnhubService} from '../../services/finnhub.service';
 import {SentimentData} from '../../models/sentiment-data';
+import {first, Subject, switchMap, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-sentiment',
@@ -9,7 +10,8 @@ import {SentimentData} from '../../models/sentiment-data';
   styleUrls: ['./sentiment.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SentimentComponent implements OnInit {
+export class SentimentComponent implements OnInit, OnDestroy {
+  private destroyed$ = new Subject<void>();
   sentimentData!: SentimentData;
 
   constructor(
@@ -19,12 +21,17 @@ export class SentimentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      this.finnhub.getInsiderSentiment(params['symbol']).subscribe(sentimentData => {
-        this.sentimentData = sentimentData;
-        this.cdRef.detectChanges();
-      });
+    this.activatedRoute.params.pipe(
+      takeUntil(this.destroyed$),
+      switchMap(params => this.finnhub.getInsiderSentiment(params['symbol']))
+    ).subscribe(sentimentData => {
+      this.sentimentData = sentimentData;
+      this.cdRef.detectChanges();
     });
   }
 
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
 }
